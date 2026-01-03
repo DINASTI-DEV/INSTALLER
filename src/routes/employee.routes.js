@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const middlewares_1 = require("../middlewares");
+const employee_1 = require("../controllers/employee");
+const router = (0, express_1.Router)();
+router.use(middlewares_1.middleware.useAuthorization);
+router.use(middlewares_1.middleware.allowMembershipRoles('company'));
+router.use(middlewares_1.middleware.allowAppRoles('admin', 'superAdmin'));
+router.get('/', employee_1.employeeController.findAll);
+router.get('/detail/:employeeId', employee_1.employeeController.findDetail);
+router.patch('/', employee_1.employeeController.update);
+exports.default = router;

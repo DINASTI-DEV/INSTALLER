@@ -1,0 +1,14 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const schedule_1 = require("../controllers/schedule");
+const middlewares_1 = require("../middlewares");
+const router = (0, express_1.Router)();
+router.use(middlewares_1.middleware.useAuthorization);
+router.get('/', middlewares_1.middleware.allowMembershipRoles('employee', 'company'), schedule_1.scheduleControllers.findAll);
+router.get('/offices/:officeId', middlewares_1.middleware.allowMembershipRoles('employee', 'company'), schedule_1.scheduleControllers.findAllDetailScheduleByOffice);
+router.get('/detail/:scheduleId', middlewares_1.middleware.allowMembershipRoles('employee', 'company'), schedule_1.scheduleControllers.findOne);
+router.post('/', middlewares_1.middleware.allowAppRoles('user'), middlewares_1.middleware.allowMembershipRoles('employee'), schedule_1.scheduleControllers.create);
+router.patch('/', middlewares_1.middleware.allowAppRoles('admin', 'superAdmin'), middlewares_1.middleware.allowMembershipRoles('company'), schedule_1.scheduleControllers.update);
+router.delete('/:scheduleId', middlewares_1.middleware.allowAppRoles('user'), middlewares_1.middleware.allowMembershipRoles('employee'), schedule_1.scheduleControllers.remove);
+exports.default = router;
