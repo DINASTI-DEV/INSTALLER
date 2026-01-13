@@ -35,7 +35,7 @@ exports.AttendanceModel = config_1.sequelize.define('Attendances', {
         allowNull: false
     },
     attendanceCategory: {
-        type: sequelize_1.DataTypes.ENUM('checkin', 'checkout', 'break'),
+        type: sequelize_1.DataTypes.ENUM('checkin', 'checkout', 'breakin', 'breakout'),
         allowNull: false
     },
     attendancePhoto: {

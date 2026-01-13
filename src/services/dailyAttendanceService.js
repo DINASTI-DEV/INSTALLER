@@ -19,7 +19,7 @@ const RecapDailyAttendanceService = async () => {
     const startOfDay = (0, dayjs_1.default)(recapDate).startOf('day').toDate();
     const endOfDay = (0, dayjs_1.default)(recapDate).endOf('day').toDate();
     // ===============================
-    // 2. Ambil semua attendance kemarin
+    // 2. Ambil attendance kemarin
     // ===============================
     const attendances = await attendanceModel_1.AttendanceModel.findAll({
         where: {
@@ -52,7 +52,8 @@ const RecapDailyAttendanceService = async () => {
                 scheduleId: attendance.attendanceScheduleId,
                 schedule: attendance.schedule,
                 checkin: null,
-                break: null,
+                breakin: null,
+                breakout: null,
                 checkout: null,
                 dailySalary: attendance.user?.position?.positionDailySalary || 0
             };
@@ -60,29 +61,31 @@ const RecapDailyAttendanceService = async () => {
         grouped[key][attendance.attendanceCategory] = attendance.attendanceTime;
     }
     // ===============================
-    // 4. Validasi & Simpan ke Summary
+    // 4. Validasi & Simpan Summary
     // ===============================
     for (const key of Object.keys(grouped)) {
         const data = grouped[key];
         const errors = [];
         const schedule = data.schedule;
-        // ⛔ Jika schedule tidak ada
         if (!schedule) {
             errors.push('Schedule tidak ditemukan');
         }
-        // ⛔ Validasi kehadiran dasar
+        // Validasi dasar
         if (!data.checkin)
             errors.push('Tidak melakukan check-in');
-        if (!data.break)
-            errors.push('Tidak melakukan break');
+        if (!data.breakin)
+            errors.push('Tidak melakukan break-in');
+        if (!data.breakout)
+            errors.push('Tidak melakukan break-out');
         if (!data.checkout)
             errors.push('Tidak melakukan checkout');
         // ===============================
-        // 5. Validasi waktu (jika data lengkap)
+        // 5. Validasi waktu
         // ===============================
-        if (schedule && data.checkin && data.break && data.checkout) {
+        if (schedule && data.checkin && data.breakin && data.breakout && data.checkout) {
             const checkinTime = (0, dayjs_1.default)(data.checkin);
-            const breakTime = (0, dayjs_1.default)(data.break);
+            const breakinTime = (0, dayjs_1.default)(data.breakin);
+            const breakoutTime = (0, dayjs_1.default)(data.breakout);
             const checkoutTime = (0, dayjs_1.default)(data.checkout);
             const scheduleStart = (0, dayjs_1.default)(`${recapDate} ${schedule.scheduleStart}`);
             const scheduleEnd = (0, dayjs_1.default)(`${recapDate} ${schedule.scheduleEnd}`);
@@ -91,8 +94,15 @@ const RecapDailyAttendanceService = async () => {
             if (checkinTime.isAfter(scheduleStart)) {
                 errors.push('Check-in melewati jam masuk');
             }
-            if (breakTime.isBefore(breakStart) || breakTime.isAfter(breakEnd)) {
-                errors.push('Waktu break di luar jadwal');
+            // ⛔ BREAK HARUS DI DALAM RANGE
+            if (breakinTime.isBefore(breakStart) || breakinTime.isAfter(breakEnd)) {
+                errors.push('Break-in di luar jam istirahat');
+            }
+            if (breakoutTime.isBefore(breakStart) || breakoutTime.isAfter(breakEnd)) {
+                errors.push('Break-out di luar jam istirahat');
+            }
+            if (breakoutTime.isBefore(breakinTime)) {
+                errors.push('Break-out lebih awal dari break-in');
             }
             if (checkoutTime.isBefore(scheduleEnd)) {
                 errors.push('Checkout lebih awal dari jam pulang');
@@ -100,7 +110,7 @@ const RecapDailyAttendanceService = async () => {
         }
         const isValidAttendance = errors.length === 0;
         // ===============================
-        // 6. Simpan summary (idempotent-safe)
+        // 6. Simpan summary
         // ===============================
         await dailyAttendanceSummaryModel_1.DailyAttendanceSummaryModel.create({
             summaryCompanyId: data.companyId,
@@ -108,7 +118,8 @@ const RecapDailyAttendanceService = async () => {
             summaryScheduleId: data.scheduleId,
             summaryDate: recapDate,
             checkinTime: data.checkin,
-            breakTime: data.break,
+            breakinTime: data.breakin,
+            breakoutTime: data.breakout,
             checkoutTime: data.checkout,
             isValidAttendance,
             dailySalary: isValidAttendance ? data.dailySalary : 0,

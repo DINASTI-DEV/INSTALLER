@@ -11,7 +11,9 @@ exports.createAttendanceSchema = joi_1.default.object({
     attendanceScheduleId: joi_1.default.number().integer().positive().required(),
     attendanceOfficeId: joi_1.default.number().integer().positive().required(),
     attendancePhoto: joi_1.default.string().optional().allow(''),
-    attendanceCategory: joi_1.default.string().valid('checkin', 'checkout', 'break').required(),
+    attendanceCategory: joi_1.default.string()
+        .valid('checkin', 'checkout', 'breakin', 'breakout')
+        .required(),
     attendanceLatitude: joi_1.default.number().optional().allow(''),
     attendanceLongitude: joi_1.default.number().optional().allow(''),
     attendanceDistanceFromOffice: joi_1.default.number().optional().allow('')
@@ -41,7 +43,7 @@ exports.findAllAttendanceSchema = joi_1.default.object({
         .optional()
         .allow(null),
     attendanceCategory: joi_1.default.string()
-        .valid('checkin', 'checkout', 'break')
+        .valid('checkin', 'checkout', 'breakin', 'breakout')
         .optional()
         .allow('')
 });
