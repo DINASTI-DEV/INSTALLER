@@ -24,7 +24,7 @@ exports.findDetailAttendanceSchema = joi_1.default.object({
 });
 exports.findLastAttendanceSchema = joi_1.default.object({
     jwtPayload: jwtPayloadSchema_1.jwtPayloadSchema,
-    scheduleId: joi_1.default.number().integer().positive().required()
+    officeId: joi_1.default.number().integer().positive().required()
 });
 exports.findAllLastStatusAttendanceSchema = joi_1.default.object({
     jwtPayload: jwtPayloadSchema_1.jwtPayloadSchema

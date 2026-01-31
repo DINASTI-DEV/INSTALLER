@@ -19,7 +19,7 @@ const findDetailLastStatusAttendance = async (req, res) => {
             where: {
                 deleted: 0,
                 attendanceCompanyId: req?.membershipPayload?.membershipCompanyId,
-                attendanceScheduleId: validatedData.scheduleId
+                attendanceOfficeId: validatedData.officeId
             },
             order: [['attendanceId', 'desc']]
         });
