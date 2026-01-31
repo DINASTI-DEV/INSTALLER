@@ -8,7 +8,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const app_1 = __importDefault(require("./src/app"));
 const configs_1 = require("./src/configs");
 const logs_1 = __importDefault(require("./src/logs"));
-const PORT = configs_1.appConfigs.app.port;
+const PORT = configs_1.appConfigs.app.port || 8000;
 const server = app_1.default.listen(PORT, () => {
   logs_1.default.info(`Server running on http://localhost:${PORT}`);
 });
