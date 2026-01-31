@@ -1,0 +1,16 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const middlewares_1 = require("../middlewares");
+const office_1 = require("../controllers/office");
+const router = (0, express_1.Router)();
+router.use(middlewares_1.middleware.useAuthorization);
+router.use(middlewares_1.middleware.allowMembershipRoles('employee', 'company'));
+router.get('/', office_1.officeControllers.findAll);
+router.get('/detail/:officeId', office_1.officeControllers.findDetail);
+router.get('/names', office_1.officeControllers.findAllOfficeName);
+router.get('/locations', middlewares_1.middleware.allowAppRoles('admin', 'superAdmin'), office_1.officeControllers.findAllOfficeLocation);
+router.post('/', middlewares_1.middleware.allowAppRoles('admin', 'superAdmin'), office_1.officeControllers.create);
+router.patch('/', middlewares_1.middleware.allowAppRoles('admin', 'superAdmin'), office_1.officeControllers.update);
+router.delete('/:officeId', middlewares_1.middleware.allowAppRoles('admin', 'superAdmin'), office_1.officeControllers.remove);
+exports.default = router;
