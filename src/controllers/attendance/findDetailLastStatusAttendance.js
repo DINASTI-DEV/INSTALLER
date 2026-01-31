@@ -18,7 +18,7 @@ const findDetailLastStatusAttendance = async (req, res) => {
         const result = await attendanceModel_1.AttendanceModel.findOne({
             where: {
                 deleted: 0,
-                attendanceUserId: req?.membershipPayload?.membershipUserId,
+                attendanceUserId: req?.jwtPayload?.userId,
                 attendanceCompanyId: req?.membershipPayload?.membershipCompanyId,
                 attendanceOfficeId: validatedData.officeId
             },
