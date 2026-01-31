@@ -20,7 +20,7 @@ const findDetailLastStatusAttendance = async (req, res) => {
                 deleted: 0,
                 attendanceUserId: req?.jwtPayload?.userId,
                 attendanceCompanyId: req?.membershipPayload?.membershipCompanyId,
-                attendanceOfficeId: validatedData.officeId
+                attendanceScheduleId: validatedData.scheduleId
             },
             order: [['attendanceId', 'desc']]
         });

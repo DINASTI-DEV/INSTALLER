@@ -34,8 +34,9 @@ const createAttendance = async (req, res) => {
         const attendanceRecord = await attendanceModel_1.AttendanceModel.findOne({
             where: {
                 deleted: 0,
-                attendanceScheduleId: validatedData.attendanceScheduleId,
-                attendanceCategory: validatedData.attendanceCategory
+                attendanceCompanyId: validatedData.attendanceCompanyId,
+                attendanceCategory: validatedData.attendanceCategory,
+                attendanceUserId: req?.jwtPayload?.userId
             }
         });
         // pritend duplicate attendance category
