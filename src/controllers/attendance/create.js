@@ -34,7 +34,7 @@ const createAttendance = async (req, res) => {
         const attendanceRecord = await attendanceModel_1.AttendanceModel.findOne({
             where: {
                 deleted: 0,
-                attendanceCompanyId: validatedData.attendanceCompanyId,
+                attendanceScheduleId: validatedData.attendanceScheduleId,
                 attendanceCategory: validatedData.attendanceCategory,
                 attendanceUserId: req?.jwtPayload?.userId
             }
