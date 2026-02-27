@@ -21,7 +21,7 @@ const assignUserPosition = async (req, res) => {
         const position = await positionModel_1.PositionModel.findOne({
             where: {
                 positionId,
-                positionCompanyId: req.membershipPayload?.membershipUserId
+                positionCompanyId: req.membershipPayload?.membershipCompanyId
             }
         });
         if (!position) {
