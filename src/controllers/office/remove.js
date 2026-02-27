@@ -8,7 +8,7 @@ const http_status_codes_1 = require("http-status-codes");
 const response_1 = require("../../utilities/response");
 const requestHandler_1 = require("../../utilities/requestHandler");
 const officeModel_1 = require("../../models/officeModel");
-const logs_1 = __importDefault(require("../../logs"));
+const logs_1 = __importDefault(require("../../../logs"));
 const officeSchema_1 = require("../../schemas/officeSchema");
 const removeOffice = async (req, res) => {
     const { error: validationError, value: validatedData } = (0, requestHandler_1.validateRequest)(officeSchema_1.removeOfficeSchema, req.params);

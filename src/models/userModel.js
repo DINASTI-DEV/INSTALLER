@@ -47,6 +47,19 @@ exports.UserModel = config_1.sequelize.define('Users', {
     userFaceId: {
         type: sequelize_1.DataTypes.TEXT,
         allowNull: true
+    },
+    userFingerprintId: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: true,
+        unique: true
+    },
+    userFingerprintDeviceId: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: true
+    },
+    userFingerprintDeviceName: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: true
     }
 }, {
     tableName: 'users',

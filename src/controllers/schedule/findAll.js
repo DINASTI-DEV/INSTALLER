@@ -12,7 +12,7 @@ const scheduleModel_1 = require("../../models/scheduleModel");
 const sequelize_1 = require("sequelize");
 const requestHandler_1 = require("../../utilities/requestHandler");
 const officeModel_1 = require("../../models/officeModel");
-const logs_1 = __importDefault(require("../../logs"));
+const logs_1 = __importDefault(require("../../../logs"));
 const findAllSchedule = async (req, res) => {
     const { error: validationError, value: validatedData } = (0, requestHandler_1.validateRequest)(scheduleSchema_1.findAllScheduleSchema, req.query);
     if (validationError)

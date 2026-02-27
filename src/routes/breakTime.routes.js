@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const breakTime_1 = require("../controllers/breakTime");
+const middlewares_1 = require("../middlewares");
+const router = (0, express_1.Router)();
+router.use(middlewares_1.middleware.useAuthorization);
+router.get('/', middlewares_1.middleware.allowMembershipRoles('employee', 'company'), breakTime_1.breakTimeControllers.findAll);
+router.get('/detail/:breakTimeId', middlewares_1.middleware.allowMembershipRoles('employee', 'company'), breakTime_1.breakTimeControllers.findDetail);
+router.post('/', middlewares_1.middleware.allowMembershipRoles('company'), breakTime_1.breakTimeControllers.create);
+router.delete('/:breakTimeId', middlewares_1.middleware.allowMembershipRoles('company'), breakTime_1.breakTimeControllers.remove);
+exports.default = router;

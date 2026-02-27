@@ -7,7 +7,7 @@ exports.updateCompany = void 0;
 const http_status_codes_1 = require("http-status-codes");
 const response_1 = require("../../utilities/response");
 const requestHandler_1 = require("../../utilities/requestHandler");
-const logs_1 = __importDefault(require("../../logs"));
+const logs_1 = __importDefault(require("../../../logs"));
 const companySchema_1 = require("../../schemas/companySchema");
 const companyModel_1 = require("../../models/companyModel");
 const updateCompany = async (req, res) => {

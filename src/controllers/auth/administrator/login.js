@@ -9,7 +9,7 @@ const response_1 = require("../../../utilities/response");
 const jwt_1 = require("../../../utilities/jwt");
 const requestHandler_1 = require("../../../utilities/requestHandler");
 const userModel_1 = require("../../../models/userModel");
-const logs_1 = __importDefault(require("../../../logs"));
+const logs_1 = __importDefault(require("../../../../logs"));
 const scurePassword_1 = require("../../../utilities/scurePassword");
 const companyAuthSchema_1 = require("../../../schemas/auth/companyAuthSchema");
 const administratorLogin = async (req, res) => {

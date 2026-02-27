@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const node_cron_1 = __importDefault(require("node-cron"));
 const dailyAttendanceService_1 = require("../services/dailyAttendanceService");
-const logs_1 = __importDefault(require("../logs"));
+const logs_1 = __importDefault(require("../../logs"));
 // // setiap 1 menit
 // export const startDailyAttendanceScheduler = (): void => {
 //   cron.schedule('* * * * *', async () => {

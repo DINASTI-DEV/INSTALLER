@@ -6,14 +6,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.requestOtp = void 0;
 const http_status_codes_1 = require("http-status-codes");
 const sequelize_1 = require("sequelize");
-const axios_1 = __importDefault(require("axios"));
 const otpSchema_1 = require("../../schemas/otpSchema");
 const requestHandler_1 = require("../../utilities/requestHandler");
 const userModel_1 = require("../../models/userModel");
 const response_1 = require("../../utilities/response");
-const logs_1 = __importDefault(require("../../logs"));
+const logs_1 = __importDefault(require("../../../logs"));
 const redis_1 = __importDefault(require("../../configs/redis"));
-const configs_1 = require("../../configs");
 const requestOtp = async (req, res) => {
     const { error: validationError, value: validatedData } = (0, requestHandler_1.validateRequest)(otpSchema_1.requestOtpSchema, req.body);
     if (validationError)
@@ -41,7 +39,10 @@ const requestOtp = async (req, res) => {
         const message = encodeURIComponent(`*${otpCode}* adalah kode verifikasi Anda.\n\n` +
             `Pengingat keamanan: Untuk memastikan keamanan akun Anda, mohon jangan bagikan informasi apa pun tentang akun Anda kepada siapa pun. kode ini akan expire dalam ${minutes} menit`);
         try {
-            await axios_1.default.get(`${configs_1.appConfigs.wablas.url}/send-message?phone=${validatedData.whatsappNumber}&message=${message}&token=${configs_1.appConfigs.wablas.token}`);
+            console.log(message);
+            // await axios.get(
+            //   `${appConfigs.wablas.url}/send-message?phone=${validatedData.whatsappNumber}&message=${message}&token=${appConfigs.wablas.token}`
+            // )
         }
         catch (e) {
             logs_1.default.error(e);

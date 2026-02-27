@@ -42,14 +42,7 @@ const findAllDailyAttendanceReport = async (req, res) => {
                         'userDeviceId',
                         'userWhatsappNumber'
                     ],
-                    include: [{ model: positionModel_1.PositionModel, as: 'position' }],
-                    where: search
-                        ? {
-                            [sequelize_1.Op.or]: [
-                                sequelize_1.Sequelize.where(sequelize_1.Sequelize.col('user.user_name'), 'LIKE', `%${search}%`)
-                            ]
-                        }
-                        : undefined
+                    include: [{ model: positionModel_1.PositionModel, as: 'position' }]
                 },
                 {
                     model: scheduleModel_1.ScheduleModel,

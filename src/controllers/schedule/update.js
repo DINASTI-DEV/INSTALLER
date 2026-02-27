@@ -9,7 +9,7 @@ const response_1 = require("../../utilities/response");
 const scheduleSchema_1 = require("../../schemas/scheduleSchema");
 const scheduleModel_1 = require("../../models/scheduleModel");
 const requestHandler_1 = require("../../utilities/requestHandler");
-const logs_1 = __importDefault(require("../../logs"));
+const logs_1 = __importDefault(require("../../../logs"));
 const updateSchedule = async (req, res) => {
     const { error: validationError, value: validatedData } = (0, requestHandler_1.validateRequest)(scheduleSchema_1.updateScheduleSchema, req.body);
     if (validationError)

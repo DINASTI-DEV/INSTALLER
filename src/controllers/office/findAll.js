@@ -11,7 +11,8 @@ const sequelize_1 = require("sequelize");
 const requestHandler_1 = require("../../utilities/requestHandler");
 const officeSchema_1 = require("../../schemas/officeSchema");
 const officeModel_1 = require("../../models/officeModel");
-const logs_1 = __importDefault(require("../../logs"));
+const logs_1 = __importDefault(require("../../../logs"));
+const breakTimeModel_1 = require("../../models/breakTimeModel");
 const findAllOffice = async (req, res) => {
     const { error: validationError, value: validatedData } = (0, requestHandler_1.validateRequest)(officeSchema_1.findAllOfficeSchema, req.query);
     if (validationError)
@@ -27,6 +28,24 @@ const findAllOffice = async (req, res) => {
                     [sequelize_1.Op.or]: [{ officeName: { [sequelize_1.Op.like]: `%${search}%` } }]
                 })
             },
+            include: [
+                {
+                    model: breakTimeModel_1.BreakTimeModel,
+                    as: 'breakTimes',
+                    attributes: [
+                        'breakTimeId',
+                        'breakTimeCategory',
+                        'breakTimeStart',
+                        'breakTimeEnd'
+                    ],
+                    order: [['breakTimeId', 'desc']],
+                    limit: 1,
+                    where: {
+                        breakTimeCategory: 'start'
+                    },
+                    separate: true
+                }
+            ],
             order: [['officeId', 'desc']],
             ...(pagination === true && {
                 limit: page.limit,

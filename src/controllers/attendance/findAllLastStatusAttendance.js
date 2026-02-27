@@ -11,7 +11,7 @@ const attendanceSchema_1 = require("../../schemas/attendanceSchema");
 const scheduleModel_1 = require("../../models/scheduleModel");
 const requestHandler_1 = require("../../utilities/requestHandler");
 const officeModel_1 = require("../../models/officeModel");
-const logs_1 = __importDefault(require("../../logs"));
+const logs_1 = __importDefault(require("../../../logs"));
 const findAllLastStatusAttendance = async (req, res) => {
     const { error: validationError, value: validatedData } = (0, requestHandler_1.validateRequest)(attendanceSchema_1.findAllLastStatusAttendanceSchema, req.query);
     if (validationError)

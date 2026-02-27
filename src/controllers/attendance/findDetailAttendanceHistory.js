@@ -9,7 +9,7 @@ const response_1 = require("../../utilities/response");
 const pagination_1 = require("../../utilities/pagination");
 const attendanceModel_1 = require("../../models/attendanceModel");
 const requestHandler_1 = require("../../utilities/requestHandler");
-const logs_1 = __importDefault(require("../../logs"));
+const logs_1 = __importDefault(require("../../../logs"));
 const attendanceSchema_1 = require("../../schemas/attendanceSchema");
 const findDetailAttendanceHistory = async (req, res) => {
     const { error: validationError, value: validatedData } = (0, requestHandler_1.validateRequest)(attendanceSchema_1.findDetailAttendanceHistorySchema, req.params);

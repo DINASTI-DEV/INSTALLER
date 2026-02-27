@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const middlewares_1 = require("../middlewares");
+const scheduler_1 = require("../controllers/scheduler");
+const router = (0, express_1.Router)();
+router.use(middlewares_1.middleware.useAuthorization);
+router.use(middlewares_1.middleware.allowAppRoles('admin', 'superAdmin'));
+router.get('/', scheduler_1.schedulerControllers.findAllSchedulerRuns);
+router.post('/run-daily-recap', scheduler_1.schedulerControllers.triggerRecapDailyAttendance);
+exports.default = router;

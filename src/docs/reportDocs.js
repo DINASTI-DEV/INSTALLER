@@ -46,6 +46,32 @@
  */
 /**
  * @swagger
+ * /api/v1/reports/recap-daily-attendances/detail/{summaryId}:
+ *   get:
+ *     summary: Get daily attendance report detail by summary ID
+ *     tags: [REPORTS]
+ *     security:
+ *       - BearerAuth: []
+ *     parameters:
+ *       - in: header
+ *         name: x-company-id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: Company ID for tenant context (multi-tenant)
+ *       - in: path
+ *         name: summaryId
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Daily attendance report detail
+ *       404:
+ *         description: Daily attendance report not found
+ */
+/**
+ * @swagger
  * /api/v1/reports/recap-daily-attendances:
  *   post:
  *     summary: Create a new position

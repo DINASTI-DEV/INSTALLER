@@ -8,6 +8,7 @@ const joi_1 = __importDefault(require("joi"));
 const jwtPayloadSchema_1 = require("./jwtPayloadSchema");
 exports.createAttendanceSchema = joi_1.default.object({
     jwtPayload: jwtPayloadSchema_1.jwtPayloadSchema,
+    attendanceUserId: joi_1.default.number().integer().positive().required(),
     attendanceScheduleId: joi_1.default.number().integer().positive().required(),
     attendanceOfficeId: joi_1.default.number().integer().positive().required(),
     attendancePhoto: joi_1.default.string().optional().allow(''),
@@ -16,7 +17,9 @@ exports.createAttendanceSchema = joi_1.default.object({
         .required(),
     attendanceLatitude: joi_1.default.number().optional().allow(''),
     attendanceLongitude: joi_1.default.number().optional().allow(''),
-    attendanceDistanceFromOffice: joi_1.default.number().optional().allow('')
+    attendanceDistanceFromOffice: joi_1.default.number().optional().allow(''),
+    attendanceFaceId: joi_1.default.string().optional().allow(''),
+    attendanceFingerprintId: joi_1.default.string().optional().allow('')
 });
 exports.findDetailAttendanceSchema = joi_1.default.object({
     jwtPayload: jwtPayloadSchema_1.jwtPayloadSchema,
@@ -24,7 +27,8 @@ exports.findDetailAttendanceSchema = joi_1.default.object({
 });
 exports.findLastAttendanceSchema = joi_1.default.object({
     jwtPayload: jwtPayloadSchema_1.jwtPayloadSchema,
-    scheduleId: joi_1.default.number().integer().positive().required()
+    scheduleId: joi_1.default.number().integer().positive().required(),
+    userId: joi_1.default.number().integer().positive().required()
 });
 exports.findAllLastStatusAttendanceSchema = joi_1.default.object({
     jwtPayload: jwtPayloadSchema_1.jwtPayloadSchema

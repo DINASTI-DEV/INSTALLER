@@ -8,7 +8,7 @@ const http_status_codes_1 = require("http-status-codes");
 const response_1 = require("../../utilities/response");
 const scheduleModel_1 = require("../../models/scheduleModel");
 const requestHandler_1 = require("../../utilities/requestHandler");
-const logs_1 = __importDefault(require("../../logs"));
+const logs_1 = __importDefault(require("../../../logs"));
 const scheduleSchema_1 = require("../../schemas/scheduleSchema");
 const removeSchedule = async (req, res) => {
     const { error: validationError, value: validatedData } = (0, requestHandler_1.validateRequest)(scheduleSchema_1.removeScheduleSchema, req.params);

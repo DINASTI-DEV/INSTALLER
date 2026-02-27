@@ -10,7 +10,7 @@ const employeeSchema_1 = require("../../schemas/employeeSchema");
 const requestHandler_1 = require("../../utilities/requestHandler");
 const pagination_1 = require("../../utilities/pagination");
 const userModel_1 = require("../../models/userModel");
-const logs_1 = __importDefault(require("../../logs"));
+const logs_1 = __importDefault(require("../../../logs"));
 const response_1 = require("../../utilities/response");
 const membershipModel_1 = require("../../models/membershipModel");
 const positionModel_1 = require("../../models/positionModel");
@@ -18,7 +18,7 @@ const findAllEmployee = async (req, res) => {
     const { error: validationError, value: validatedData } = (0, requestHandler_1.validateRequest)(employeeSchema_1.findAllEmployeeSchema, req.query);
     if (validationError)
         return (0, requestHandler_1.handleValidationError)(res, validationError);
-    const { page: queryPage, size: querySize, search, pagination } = validatedData;
+    const { page: queryPage, size: querySize, search, pagination, officeId } = validatedData;
     try {
         const page = new pagination_1.Pagination(Number(queryPage) || 0, Number(querySize) || 10);
         const result = await membershipModel_1.MembershipModel.findAndCountAll({
@@ -28,6 +28,9 @@ const findAllEmployee = async (req, res) => {
                 membershipRole: 'employee',
                 ...(Boolean(req.body?.jwtPayload?.userRole === 'user') && {
                     membershipUserId: { [sequelize_1.Op.not]: req.body?.jwtPayload?.userId }
+                }),
+                ...(Boolean(officeId) && {
+                    membershipOfficeId: officeId
                 })
             },
             include: [
@@ -45,6 +48,8 @@ const findAllEmployee = async (req, res) => {
                         'userDeviceId',
                         'userName',
                         'userWhatsappNumber',
+                        'userFaceId',
+                        'userFingerprintId',
                         'userRole',
                         'createdAt',
                         'updatedAt'

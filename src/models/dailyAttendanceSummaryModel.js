@@ -51,6 +51,12 @@ exports.DailyAttendanceSummaryModel = config_1.sequelize.define('DailyAttendance
         allowNull: false,
         defaultValue: 0
     },
+    totalWorkHours: {
+        type: sequelize_1.DataTypes.DECIMAL(5, 2),
+        allowNull: true,
+        defaultValue: 0,
+        comment: 'Total jam kerja efektif (checkout - checkin - break), dalam jam'
+    },
     description: {
         type: sequelize_1.DataTypes.TEXT,
         allowNull: true

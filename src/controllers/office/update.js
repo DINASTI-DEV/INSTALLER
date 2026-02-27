@@ -9,7 +9,7 @@ const response_1 = require("../../utilities/response");
 const requestHandler_1 = require("../../utilities/requestHandler");
 const officeSchema_1 = require("../../schemas/officeSchema");
 const officeModel_1 = require("../../models/officeModel");
-const logs_1 = __importDefault(require("../../logs"));
+const logs_1 = __importDefault(require("../../../logs"));
 const updateOffice = async (req, res) => {
     const { error: validationError, value: validatedData } = (0, requestHandler_1.validateRequest)(officeSchema_1.updateOfficeSchema, req.body);
     if (validationError)

@@ -7,7 +7,7 @@ exports.removeMembership = void 0;
 const http_status_codes_1 = require("http-status-codes");
 const response_1 = require("../../utilities/response");
 const requestHandler_1 = require("../../utilities/requestHandler");
-const logs_1 = __importDefault(require("../../logs"));
+const logs_1 = __importDefault(require("../../../logs"));
 const membershipSchema_1 = require("../../schemas/membershipSchema");
 const membershipModel_1 = require("../../models/membershipModel");
 const removeMembership = async (req, res) => {

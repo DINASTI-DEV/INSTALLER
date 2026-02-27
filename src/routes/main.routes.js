@@ -19,6 +19,9 @@ const appInfo_routes_1 = __importDefault(require("./appInfo.routes"));
 const position_routes_1 = __importDefault(require("./position.routes"));
 const report_routes_1 = __importDefault(require("./report.routes"));
 const faceRecognition_routes_1 = __importDefault(require("./faceRecognition.routes"));
+const breakTime_routes_1 = __importDefault(require("./breakTime.routes"));
+const admin_routes_1 = __importDefault(require("./admin.routes"));
+const scheduler_routes_1 = __importDefault(require("./scheduler.routes"));
 const apiVersion = '/api/v1';
 const appRouterV1 = (app) => {
     app.use(apiVersion, appCheck_routes_1.default);
@@ -36,5 +39,8 @@ const appRouterV1 = (app) => {
     app.use(apiVersion + '/positions', position_routes_1.default);
     app.use(apiVersion + '/reports', report_routes_1.default);
     app.use(apiVersion + '/face-recognitions', faceRecognition_routes_1.default);
+    app.use(apiVersion + '/break-times', breakTime_routes_1.default);
+    app.use(apiVersion + '/admin', admin_routes_1.default);
+    app.use(apiVersion + '/scheduler-runs', scheduler_routes_1.default);
 };
 exports.appRouterV1 = appRouterV1;

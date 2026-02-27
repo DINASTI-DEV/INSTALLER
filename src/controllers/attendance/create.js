@@ -10,13 +10,12 @@ const scheduleModel_1 = require("../../models/scheduleModel");
 const attendanceSchema_1 = require("../../schemas/attendanceSchema");
 const moment_1 = __importDefault(require("moment"));
 const requestHandler_1 = require("../../utilities/requestHandler");
-const logs_1 = __importDefault(require("../../logs"));
+const logs_1 = __importDefault(require("../../../logs"));
 const attendanceModel_1 = require("../../models/attendanceModel");
 const createAttendance = async (req, res) => {
     const { error: validationError, value: validatedData } = (0, requestHandler_1.validateRequest)(attendanceSchema_1.createAttendanceSchema, req.body);
     if (validationError)
         return (0, requestHandler_1.handleValidationError)(res, validationError);
-    console.log(validatedData);
     try {
         const scheduleRecord = await scheduleModel_1.ScheduleModel.findOne({
             where: {
@@ -36,13 +35,13 @@ const createAttendance = async (req, res) => {
                 deleted: 0,
                 attendanceScheduleId: validatedData.attendanceScheduleId,
                 attendanceCategory: validatedData.attendanceCategory,
-                attendanceUserId: req?.jwtPayload?.userId
+                attendanceUserId: validatedData.attendanceUserId
             }
         });
         // pritend duplicate attendance category
         if (attendanceRecord === null) {
             validatedData.attendanceTime = (0, moment_1.default)().toISOString();
-            validatedData.attendanceUserId = req?.jwtPayload?.userId;
+            validatedData.attendanceUserId = validatedData.attendanceUserId;
             validatedData.attendanceCompanyId = req?.membershipPayload?.membershipCompanyId;
             await attendanceModel_1.AttendanceModel.create(validatedData);
         }

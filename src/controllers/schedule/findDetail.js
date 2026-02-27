@@ -10,7 +10,7 @@ const scheduleModel_1 = require("../../models/scheduleModel");
 const scheduleSchema_1 = require("../../schemas/scheduleSchema");
 const requestHandler_1 = require("../../utilities/requestHandler");
 const officeModel_1 = require("../../models/officeModel");
-const logs_1 = __importDefault(require("../../logs"));
+const logs_1 = __importDefault(require("../../../logs"));
 const findDetailSchedule = async (req, res) => {
     const { error: validationError, value: validatedData } = (0, requestHandler_1.validateRequest)(scheduleSchema_1.findDetailScheduleSchema, req.params);
     if (validationError)

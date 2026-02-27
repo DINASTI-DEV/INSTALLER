@@ -9,7 +9,7 @@ const response_1 = require("../../utilities/response");
 const myProfileSchema_1 = require("../../schemas/myProfileSchema");
 const requestHandler_1 = require("../../utilities/requestHandler");
 const userModel_1 = require("../../models/userModel");
-const logs_1 = __importDefault(require("../../logs"));
+const logs_1 = __importDefault(require("../../../logs"));
 const configs_1 = require("../../configs");
 const updateMyProfile = async (req, res) => {
     const { error: validationError, value: validatedData } = (0, requestHandler_1.validateRequest)(myProfileSchema_1.updateMyProfileSchema, req.body);

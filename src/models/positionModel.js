@@ -19,10 +19,10 @@ exports.PositionModel = config_1.sequelize.define('Positions', {
         type: sequelize_1.DataTypes.STRING(100),
         allowNull: false
     },
-    positionDailySalary: {
+    positionHourlySalary: {
         type: sequelize_1.DataTypes.DECIMAL(12, 2),
         allowNull: false,
-        comment: 'Gaji per hari'
+        comment: 'Gaji per jam'
     }
 }, {
     tableName: 'positions',

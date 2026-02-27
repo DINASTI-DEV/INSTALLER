@@ -15,7 +15,8 @@ exports.employeeRegistrationSchema = joi_1.default.object({
     userWhatsappNumber: joi_1.default.string().required(),
     userPassword: joi_1.default.string().min(6).required(),
     userDeviceId: joi_1.default.string().optional().allow(''),
-    userInvitationCode: joi_1.default.string().required()
+    userInvitationCode: joi_1.default.string().required(),
+    userFingerprintId: joi_1.default.string().optional().allow('')
 });
 exports.userUpdatePasswordSchema = joi_1.default.object({
     userPassword: joi_1.default.string().min(6).required(),

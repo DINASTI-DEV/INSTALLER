@@ -7,7 +7,7 @@ exports.findDetailPosition = void 0;
 const http_status_codes_1 = require("http-status-codes");
 const response_1 = require("../../utilities/response");
 const requestHandler_1 = require("../../utilities/requestHandler");
-const logs_1 = __importDefault(require("../../logs"));
+const logs_1 = __importDefault(require("../../../logs"));
 const positionModel_1 = require("../../models/positionModel");
 const positionSchema_1 = require("../../schemas/positionSchema");
 const findDetailPosition = async (req, res) => {

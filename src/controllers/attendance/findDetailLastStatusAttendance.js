@@ -9,16 +9,16 @@ const response_1 = require("../../utilities/response");
 const attendanceModel_1 = require("../../models/attendanceModel");
 const attendanceSchema_1 = require("../../schemas/attendanceSchema");
 const requestHandler_1 = require("../../utilities/requestHandler");
-const logs_1 = __importDefault(require("../../logs"));
+const logs_1 = __importDefault(require("../../../logs"));
 const findDetailLastStatusAttendance = async (req, res) => {
-    const { error: validationError, value: validatedData } = (0, requestHandler_1.validateRequest)(attendanceSchema_1.findLastAttendanceSchema, req.params);
+    const { error: validationError, value: validatedData } = (0, requestHandler_1.validateRequest)(attendanceSchema_1.findLastAttendanceSchema, { ...req.params, ...req.query });
     if (validationError)
         return (0, requestHandler_1.handleValidationError)(res, validationError);
     try {
         const result = await attendanceModel_1.AttendanceModel.findOne({
             where: {
                 deleted: 0,
-                attendanceUserId: req?.jwtPayload?.userId,
+                attendanceUserId: validatedData.userId,
                 attendanceCompanyId: req?.membershipPayload?.membershipCompanyId,
                 attendanceScheduleId: validatedData.scheduleId
             },

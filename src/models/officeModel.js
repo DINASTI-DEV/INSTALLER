@@ -4,6 +4,7 @@ exports.OfficeModel = void 0;
 const sequelize_1 = require("sequelize");
 const config_1 = require("../database/config");
 const baseModelFields_1 = require("../database/baseModelFields");
+const breakTimeModel_1 = require("./breakTimeModel");
 exports.OfficeModel = config_1.sequelize.define('Offices', {
     ...baseModelFields_1.BaseModelFields,
     officeId: {
@@ -45,4 +46,12 @@ exports.OfficeModel = config_1.sequelize.define('Offices', {
     timestamps: false,
     underscored: true,
     freezeTableName: true
+});
+exports.OfficeModel.hasMany(breakTimeModel_1.BreakTimeModel, {
+    foreignKey: 'breakTimeOfficeId',
+    as: 'breakTimes'
+});
+breakTimeModel_1.BreakTimeModel.belongsTo(exports.OfficeModel, {
+    foreignKey: 'breakTimeOfficeId',
+    as: 'office'
 });

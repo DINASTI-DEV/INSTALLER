@@ -9,11 +9,9 @@ const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const cors_1 = __importDefault(require("cors"));
 const morgan_1 = __importDefault(require("morgan"));
 const main_routes_1 = require("./routes/main.routes");
-const logs_1 = __importDefault(require("./logs"));
 const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
 const swagger_1 = __importDefault(require("./configs/swagger"));
 const helmet_1 = __importDefault(require("helmet"));
-const express_rate_limit_1 = __importDefault(require("express-rate-limit"));
 const compression_1 = __importDefault(require("compression"));
 const configs_1 = require("./configs");
 const requestHandler_1 = require("./utilities/requestHandler");
@@ -21,7 +19,7 @@ const http_status_codes_1 = require("http-status-codes");
 const response_1 = require("./utilities/response");
 const middlewares_1 = require("./middlewares");
 require("../src/scheduler/dailyAttendanceScheduler");
-const startTime = Date.now();
+const logs_1 = __importDefault(require("../logs"));
 const app = (0, express_1.default)();
 app.use(middlewares_1.middleware.requestTimer);
 app.use((0, helmet_1.default)());
@@ -33,11 +31,11 @@ app.use(body_parser_1.default.urlencoded({ limit: '10mb', extended: true }));
 app.use(body_parser_1.default.json({ limit: '10mb' }));
 app.use((0, cookie_parser_1.default)());
 app.use((0, compression_1.default)());
-const limiter = (0, express_rate_limit_1.default)({
-    windowMs: parseInt(configs_1.appConfigs.rateLimit.windowMinutes ?? '15') * 60 * 1000,
-    max: parseInt(configs_1.appConfigs.rateLimit.maxRequest ?? '100')
-});
-app.use(limiter);
+// const limiter = rateLimit({
+//   windowMs: parseInt(appConfigs.rateLimit.windowMinutes ?? '15') * 60 * 1000,
+//   max: parseInt(appConfigs.rateLimit.maxRequest ?? '100')
+// })
+// app.use(limiter)
 // Trust proxy (for production with nginx/proxy)
 app.set('trust proxy', 1);
 app.use((0, morgan_1.default)('combined', {

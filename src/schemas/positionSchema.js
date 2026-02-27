@@ -14,7 +14,7 @@ exports.createPositionSchema = joi_1.default.object({
         'string.max': 'positionName maksimal 100 karakter',
         'any.required': 'positionName wajib diisi'
     }),
-    positionDailySalary: joi_1.default.number().precision(2).positive().required().messages({
+    positionHourlySalary: joi_1.default.number().precision(2).positive().required().messages({
         'number.base': 'position harus berupa angka',
         'number.positive': 'position harus lebih dari 0',
         'any.required': 'position wajib diisi'
@@ -34,10 +34,10 @@ exports.updatePositionchema = joi_1.default.object({
         'string.max': 'positionName maksimal 100 karakter',
         'any.required': 'positionName wajib diisi'
     }),
-    positionDailySalary: joi_1.default.number().precision(2).positive().required().messages({
-        'number.base': 'dailySalary harus berupa angka',
-        'number.positive': 'dailySalary harus lebih dari 0',
-        'any.required': 'dailySalary wajib diisi'
+    positionHourlySalary: joi_1.default.number().precision(2).positive().required().messages({
+        'number.base': 'positionHourlySalary harus berupa angka',
+        'number.positive': 'positionHourlySalary harus lebih dari 0',
+        'any.required': 'positionHourlySalary wajib diisi'
     })
 });
 exports.removePositionSchema = joi_1.default.object({

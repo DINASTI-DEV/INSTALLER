@@ -7,5 +7,6 @@ const router = (0, express_1.Router)();
 router.use(middlewares_1.middleware.useAuthorization);
 router.use(middlewares_1.middleware.allowMembershipRoles('company'));
 router.get('/recap-daily-attendances', report_1.ReportController.findAllDailyAttendanceReport);
+router.get('/recap-daily-attendances/detail/:summaryId', report_1.ReportController.findDetailDailyAttendanceReport);
 router.post('/recap-daily-attendances', report_1.ReportController.recapDailyAttendance);
 exports.default = router;

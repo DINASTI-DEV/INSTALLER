@@ -92,7 +92,7 @@
  */
 /**
  * @swagger
- * /api/v1/attendances/last-status:
+ * /api/v1/attendances/last-status/{userId}:
  *   get:
  *     summary: Get last attendance status
  *     tags: [ATTENDANCES]
@@ -105,6 +105,11 @@
  *         schema:
  *           type: integer
  *         description: Company ID fortenant contex (multi-tenant)
+ *       - in: path
+ *         name: userId
+ *         required: true
+ *         schema:
+ *           type: integer
  *     responses:
  *       200:
  *         description: Attendance detail

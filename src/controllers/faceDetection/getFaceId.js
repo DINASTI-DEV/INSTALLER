@@ -10,7 +10,7 @@ const getFaceId = async (req, res) => {
         const user = await userModel_1.UserModel.findOne({
             where: {
                 deleted: 0,
-                userId: req.jwtPayload?.userId
+                userId: req.body?.userId
             }
         });
         if (user == null) {

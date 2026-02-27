@@ -12,7 +12,6 @@ const userModel_1 = require("../../models/userModel");
 const rekognition = new aws_sdk_1.default.Rekognition();
 const COLLECTION_ID = 'employee_faces';
 const registerFace = async (req, res) => {
-    console.log(req.file);
     if (!req.file) {
         return res
             .status(http_status_codes_1.StatusCodes.BAD_REQUEST)
@@ -22,7 +21,7 @@ const registerFace = async (req, res) => {
         const user = await userModel_1.UserModel.findOne({
             where: {
                 deleted: 0,
-                userId: req.jwtPayload?.userId
+                userId: req.body?.userId
             }
         });
         if (user == null) {
@@ -34,7 +33,7 @@ const registerFace = async (req, res) => {
             .indexFaces({
             CollectionId: COLLECTION_ID,
             Image: { Bytes: req.file.buffer },
-            ExternalImageId: req.jwtPayload?.userId?.toString() || ''
+            ExternalImageId: req.body?.userId?.toString() || ''
         })
             .promise();
         const faceId = result.FaceRecords?.[0]?.Face?.FaceId;

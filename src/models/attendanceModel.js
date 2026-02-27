@@ -53,6 +53,14 @@ exports.AttendanceModel = config_1.sequelize.define('Attendances', {
     attendanceDistanceFromOffice: {
         type: sequelize_1.DataTypes.INTEGER,
         allowNull: true
+    },
+    attendanceFaceId: {
+        type: sequelize_1.DataTypes.TEXT,
+        allowNull: true
+    },
+    attendanceFingerprintId: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: true
     }
 }, {
     tableName: 'attendances',

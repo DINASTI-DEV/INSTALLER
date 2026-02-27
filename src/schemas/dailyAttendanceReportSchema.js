@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.findAllDailyAttendanceReportSchema = void 0;
+exports.findDetailDailyAttendanceReportSchema = exports.findAllDailyAttendanceReportSchema = void 0;
 const joi_1 = __importDefault(require("joi"));
 const jwtPayloadSchema_1 = require("./jwtPayloadSchema");
 exports.findAllDailyAttendanceReportSchema = joi_1.default.object({
@@ -14,4 +14,8 @@ exports.findAllDailyAttendanceReportSchema = joi_1.default.object({
     pagination: joi_1.default.boolean().optional(),
     startDate: joi_1.default.string().allow('').optional(),
     endDate: joi_1.default.string().allow('').optional()
+});
+exports.findDetailDailyAttendanceReportSchema = joi_1.default.object({
+    jwtPayload: jwtPayloadSchema_1.jwtPayloadSchema,
+    summaryId: joi_1.default.number().integer().positive().required()
 });

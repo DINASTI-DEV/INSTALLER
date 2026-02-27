@@ -25,7 +25,7 @@ const compareFace = async (req, res) => {
         const imageUrl = await s3
             .upload({
             Bucket: BUCKET_NAME,
-            Key: `attendance/${req.jwtPayload.userId}/${Date.now()}.jpg`,
+            Key: `attendance/${req.body.userId}/${Date.now()}.jpg`,
             Body: req.file.buffer,
             ContentType: 'image/jpeg'
         })
@@ -48,7 +48,7 @@ const compareFace = async (req, res) => {
             }));
         }
         const matchedFace = result.FaceMatches[0];
-        if (Number(matchedFace.Face?.ExternalImageId) !== req.jwtPayload?.userId) {
+        if (Number(matchedFace.Face?.ExternalImageId) !== req.body?.userId) {
             return res.status(http_status_codes_1.StatusCodes.OK).json(response_1.ResponseData.success({
                 message: 'Face not match',
                 data: { imageUrl: imageUrl.Location }

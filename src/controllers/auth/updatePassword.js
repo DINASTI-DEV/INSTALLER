@@ -9,7 +9,7 @@ const sequelize_1 = require("sequelize");
 const response_1 = require("../../utilities/response");
 const requestHandler_1 = require("../../utilities/requestHandler");
 const userModel_1 = require("../../models/userModel");
-const logs_1 = __importDefault(require("../../logs"));
+const logs_1 = __importDefault(require("../../../logs"));
 const scurePassword_1 = require("../../utilities/scurePassword");
 const employeeAuthSchema_1 = require("../../schemas/auth/employeeAuthSchema");
 const updatePassword = async (req, res) => {

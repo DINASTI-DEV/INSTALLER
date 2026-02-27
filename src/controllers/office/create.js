@@ -9,7 +9,7 @@ const response_1 = require("../../utilities/response");
 const officeSchema_1 = require("../../schemas/officeSchema");
 const requestHandler_1 = require("../../utilities/requestHandler");
 const officeModel_1 = require("../../models/officeModel");
-const logs_1 = __importDefault(require("../../logs"));
+const logs_1 = __importDefault(require("../../../logs"));
 const config_1 = require("../../database/config");
 const scheduleModel_1 = require("../../models/scheduleModel");
 const createOffice = async (req, res) => {
