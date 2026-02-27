@@ -11,7 +11,7 @@ const createPosition = async (req, res) => {
     if (validationError)
         return (0, requestHandler_1.handleValidationError)(res, validationError);
     try {
-        validatedData.positionCompanyId = req.membershipPayload?.membershipUserId || 0;
+        validatedData.positionCompanyId = req.membershipPayload?.membershipCompanyId || 0;
         await positionModel_1.PositionModel.create(validatedData);
         const response = response_1.ResponseData.success({});
         return res.status(http_status_codes_1.StatusCodes.OK).json(response);

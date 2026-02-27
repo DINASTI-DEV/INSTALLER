@@ -35,7 +35,8 @@ const createAdminUser = async (req, res) => {
             userWhatsappNumber: validatedData.userWhatsappNumber,
             userPassword: (0, scurePassword_1.hashPassword)(validatedData.userPassword),
             userRole: 'admin',
-            userDeviceId: '_'
+            userDeviceId: '_',
+            userOnboardingStatus: 'completed'
         };
         const createdUser = await userModel_1.UserModel.create(createData, { transaction });
         const membershipPayload = {
