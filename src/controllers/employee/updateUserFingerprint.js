@@ -36,18 +36,20 @@ const updateUserFingerprint = async (req, res) => {
             ...(userFingerprintDeviceName?.length &&
                 userFingerprintDeviceName?.length > 0 && { userFingerprintDeviceName })
         };
+        console.log('payload', payload);
         // user_fingerprint_id di DB unique: jika id ini sudah dipakai user lain, update akan gagal
         const newFingerprintId = payload.userFingerprintId != null ? String(payload.userFingerprintId).trim() : null;
         if (newFingerprintId != null && newFingerprintId.length > 0) {
             const existingWithFingerprint = await userModel_1.UserModel.findOne({
                 where: {
                     deleted: 0,
-                    userFingerprintId: newFingerprintId
+                    userFingerprintId: newFingerprintId,
+                    userFingerprintDeviceId: userFingerprintDeviceId
                 }
             });
             if (existingWithFingerprint != null &&
                 Number(existingWithFingerprint.userId) !== Number(userId)) {
-                const message = 'Fingerprint ID already assigned to another user. Use a different fingerprint ID or remove it from the other user first.';
+                const message = `Fingerprint ID sudah digunakan oleh user lain dengan device ${userFingerprintDeviceName}. Gunakan fingerprint ID lain atau hapus dari user lain terlebih dahulu.`;
                 logs_1.default.warn(message);
                 return res.status(http_status_codes_1.StatusCodes.CONFLICT).json(response_1.ResponseData.error({ message }));
             }
@@ -65,7 +67,7 @@ const updateUserFingerprint = async (req, res) => {
     }
     catch (serverError) {
         if (serverError instanceof sequelize_1.UniqueConstraintError) {
-            const message = 'Fingerprint ID already assigned to another user. Use a different fingerprint ID or remove it from the other user first.';
+            const message = `Fingerprint ID sudah digunakan oleh user lain dengan device ${userFingerprintDeviceName}. Gunakan fingerprint ID lain atau hapus dari user lain terlebih dahulu.`;
             logs_1.default.warn(message);
             return res.status(http_status_codes_1.StatusCodes.CONFLICT).json(response_1.ResponseData.error({ message }));
         }

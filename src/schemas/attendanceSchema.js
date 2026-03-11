@@ -19,7 +19,9 @@ exports.createAttendanceSchema = joi_1.default.object({
     attendanceLongitude: joi_1.default.number().optional().allow(''),
     attendanceDistanceFromOffice: joi_1.default.number().optional().allow(''),
     attendanceFaceId: joi_1.default.string().optional().allow(''),
-    attendanceFingerprintId: joi_1.default.string().optional().allow('')
+    attendanceFingerprintId: joi_1.default.string().optional().allow(''),
+    attendanceFingerprintDeviceName: joi_1.default.string().optional().allow(''),
+    attendanceFingerprintDeviceId: joi_1.default.string().optional().allow('')
 });
 exports.findDetailAttendanceSchema = joi_1.default.object({
     jwtPayload: jwtPayloadSchema_1.jwtPayloadSchema,

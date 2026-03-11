@@ -1,1 +1,32 @@
 {"level":"info","message":"Server running on http://localhost:8000","service":"backend-service","timestamp":"2026-02-27 14:56:56"}
+{"level":"info","message":"Server running on http://localhost:8000","service":"backend-service","timestamp":"2026-03-11 10:56:03"}
+{"level":"info","message":"User found successfully","service":"backend-service","timestamp":"2026-03-11 10:57:09"}
+{"level":"info","message":"::ffff:192.168.1.12 - - [11/Mar/2026:03:57:09 +0000] \"GET /api/v1/my-profiles HTTP/1.1\" 200 311 \"-\" \"okhttp/4.9.2\"","service":"backend-service","timestamp":"2026-03-11 10:57:09"}
+{"level":"info","message":"Fetched all employee successfully","service":"backend-service","timestamp":"2026-03-11 10:57:12"}
+{"level":"info","message":"::ffff:192.168.1.12 - - [11/Mar/2026:03:57:12 +0000] \"GET /api/v1/employees?pagination=true&page=0&size=10&search= HTTP/1.1\" 200 - \"-\" \"okhttp/4.9.2\"","service":"backend-service","timestamp":"2026-03-11 10:57:12"}
+{"level":"info","message":"User found successfully","service":"backend-service","timestamp":"2026-03-11 10:57:15"}
+{"level":"info","message":"::ffff:192.168.1.12 - - [11/Mar/2026:03:57:15 +0000] \"GET /api/v1/my-profiles HTTP/1.1\" 200 311 \"-\" \"okhttp/4.9.2\"","service":"backend-service","timestamp":"2026-03-11 10:57:15"}
+{"level":"info","message":"Fetched employees by officeId 2 successfully","service":"backend-service","timestamp":"2026-03-11 10:57:16"}
+{"level":"info","message":"::ffff:192.168.1.12 - - [11/Mar/2026:03:57:16 +0000] \"GET /api/v1/employees/office/2?pagination=true&page=0&size=10& HTTP/1.1\" 200 179 \"-\" \"okhttp/4.9.2\"","service":"backend-service","timestamp":"2026-03-11 10:57:16"}
+{"level":"info","message":"Fetched employees by officeId 2 successfully","service":"backend-service","timestamp":"2026-03-11 10:57:16"}
+{"level":"info","message":"::ffff:192.168.1.12 - - [11/Mar/2026:03:57:16 +0000] \"GET /api/v1/employees/office/2?pagination=true&page=0&size=10& HTTP/1.1\" 200 179 \"-\" \"okhttp/4.9.2\"","service":"backend-service","timestamp":"2026-03-11 10:57:16"}
+{"level":"info","message":"Fetched employees by officeId 2 successfully","service":"backend-service","timestamp":"2026-03-11 10:57:19"}
+{"level":"info","message":"::ffff:192.168.1.12 - - [11/Mar/2026:03:57:19 +0000] \"GET /api/v1/employees/office/2?pagination=true&page=0&size=10& HTTP/1.1\" 200 179 \"-\" \"okhttp/4.9.2\"","service":"backend-service","timestamp":"2026-03-11 10:57:19"}
+{"level":"info","message":"User found successfully","service":"backend-service","timestamp":"2026-03-11 10:57:20"}
+{"level":"info","message":"::ffff:192.168.1.12 - - [11/Mar/2026:03:57:20 +0000] \"GET /api/v1/my-profiles HTTP/1.1\" 200 311 \"-\" \"okhttp/4.9.2\"","service":"backend-service","timestamp":"2026-03-11 10:57:20"}
+{"level":"info","message":"Fetched employees by officeId 1 successfully","service":"backend-service","timestamp":"2026-03-11 10:57:21"}
+{"level":"info","message":"::ffff:192.168.1.12 - - [11/Mar/2026:03:57:21 +0000] \"GET /api/v1/employees/office/1?pagination=true&page=0&size=10& HTTP/1.1\" 200 683 \"-\" \"okhttp/4.9.2\"","service":"backend-service","timestamp":"2026-03-11 10:57:21"}
+{"level":"info","message":"Fetched employees by officeId 1 successfully","service":"backend-service","timestamp":"2026-03-11 10:57:21"}
+{"level":"info","message":"::ffff:192.168.1.12 - - [11/Mar/2026:03:57:21 +0000] \"GET /api/v1/employees/office/1?pagination=true&page=0&size=10& HTTP/1.1\" 200 683 \"-\" \"okhttp/4.9.2\"","service":"backend-service","timestamp":"2026-03-11 10:57:21"}
+{"level":"info","message":"Attendance found successfully","service":"backend-service","timestamp":"2026-03-11 10:57:21"}
+{"level":"info","message":"::ffff:192.168.1.12 - - [11/Mar/2026:03:57:21 +0000] \"GET /api/v1/attendances/last-status/5 HTTP/1.1\" 200 850 \"-\" \"okhttp/4.9.2\"","service":"backend-service","timestamp":"2026-03-11 10:57:21"}
+{"level":"info","message":"Attendance found successfully","service":"backend-service","timestamp":"2026-03-11 10:57:21"}
+{"level":"info","message":"::ffff:192.168.1.12 - - [11/Mar/2026:03:57:21 +0000] \"GET /api/v1/attendances/last-status/5 HTTP/1.1\" 200 850 \"-\" \"okhttp/4.9.2\"","service":"backend-service","timestamp":"2026-03-11 10:57:21"}
+{"level":"info","message":"Attendance found successfully","service":"backend-service","timestamp":"2026-03-11 10:57:42"}
+{"level":"info","message":"::ffff:192.168.1.12 - - [11/Mar/2026:03:57:42 +0000] \"GET /api/v1/attendances/last-status/detail/4?userId=5 HTTP/1.1\" 200 125 \"-\" \"okhttp/4.9.2\"","service":"backend-service","timestamp":"2026-03-11 10:57:42"}
+{"level":"info","message":"Fetched employees by officeId 1 successfully","service":"backend-service","timestamp":"2026-03-11 10:57:57"}
+{"level":"info","message":"::ffff:192.168.1.12 - - [11/Mar/2026:03:57:57 +0000] \"GET /api/v1/employees/office/1?pagination=true&page=0&size=10& HTTP/1.1\" 200 683 \"-\" \"okhttp/4.9.2\"","service":"backend-service","timestamp":"2026-03-11 10:57:57"}
+{"level":"info","message":"User found successfully","service":"backend-service","timestamp":"2026-03-11 10:57:57"}
+{"level":"info","message":"::ffff:192.168.1.12 - - [11/Mar/2026:03:57:57 +0000] \"GET /api/v1/my-profiles HTTP/1.1\" 200 311 \"-\" \"okhttp/4.9.2\"","service":"backend-service","timestamp":"2026-03-11 10:57:57"}
+{"level":"info","message":"Attendance found successfully","service":"backend-service","timestamp":"2026-03-11 10:57:57"}
+{"level":"info","message":"::ffff:192.168.1.12 - - [11/Mar/2026:03:57:57 +0000] \"GET /api/v1/attendances/last-status/5 HTTP/1.1\" 200 850 \"-\" \"okhttp/4.9.2\"","service":"backend-service","timestamp":"2026-03-11 10:57:57"}

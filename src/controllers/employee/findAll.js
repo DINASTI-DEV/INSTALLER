@@ -39,6 +39,7 @@ const findAllEmployee = async (req, res) => {
                     as: 'employee',
                     where: {
                         deleted: 0,
+                        userRole: 'user',
                         ...(Boolean(search) && {
                             [sequelize_1.Op.or]: [{ userName: { [sequelize_1.Op.like]: `%${search}%` } }]
                         })

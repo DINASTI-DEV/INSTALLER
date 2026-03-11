@@ -49,6 +49,7 @@ const createEmployee = async (req, res) => {
         }
         validatedData.userPassword = (0, scurePassword_1.hashPassword)('qwerty');
         validatedData.userRole = 'user';
+        validatedData.userOnboardingStatus = 'completed';
         const createdUser = await userModel_1.UserModel.create(validatedData, { transaction });
         const membershipPayload = {
             membershipUserId: createdUser.userId,
