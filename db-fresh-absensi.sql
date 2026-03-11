@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Feb 27, 2026 at 08:01 AM
+-- Generation Time: Mar 11, 2026 at 05:33 AM
 -- Server version: 8.0.44
 -- PHP Version: 8.3.28
 
@@ -44,7 +44,9 @@ CREATE TABLE `attendances` (
   `attendance_longitude` varchar(255) DEFAULT NULL,
   `attendance_distance_from_office` int DEFAULT NULL,
   `attendance_face_id` text,
-  `attendance_fingerprint_id` varchar(255) DEFAULT NULL
+  `attendance_fingerprint_id` varchar(255) DEFAULT NULL,
+  `attendance_fingerprint_device_name` varchar(255) DEFAULT NULL,
+  `attendance_fingerprint_device_id` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -125,10 +127,7 @@ CREATE TABLE `daily_attendance_summaries` (
 INSERT INTO `daily_attendance_summaries` (`created_at`, `deleted_at`, `updated_at`, `deleted`, `summary_id`, `summary_company_id`, `summary_user_id`, `summary_schedule_id`, `summary_date`, `checkin_time`, `break_time`, `checkout_time`, `is_valid_attendance`, `daily_salary`, `total_work_hours`, `description`) VALUES
 ('2026-02-25 08:50:00', NULL, '2026-02-25 08:50:00', 0, 1, 1, 14, 1, '2026-02-24', '2026-02-24 06:49:52', NULL, NULL, 0, 0.00, 0.00, 'Tidak melakukan break-in; Tidak melakukan break-out; Tidak melakukan checkout'),
 ('2026-02-25 08:50:00', NULL, '2026-02-25 08:50:00', 0, 2, 1, 14, 3, '2026-02-24', '2026-02-24 07:14:06', '2026-02-24 07:20:04', '2026-02-24 07:29:57', 0, 10000.00, 0.26, 'Break-in di luar jam istirahat; Break-out di luar jam istirahat; Checkout lebih awal dari jam pulang'),
-('2026-02-25 08:50:00', NULL, '2026-02-25 08:50:00', 0, 3, 1, 13, 3, '2026-02-24', '2026-02-24 07:42:33', '2026-02-24 07:51:23', NULL, 0, 0.00, 0.00, 'Tidak melakukan break-out; Tidak melakukan checkout'),
-('2026-02-25 08:51:00', NULL, '2026-02-25 08:51:00', 0, 4, 1, 14, 1, '2026-02-24', '2026-02-24 06:49:52', NULL, NULL, 0, 0.00, 0.00, 'Tidak melakukan break-in; Tidak melakukan break-out; Tidak melakukan checkout'),
-('2026-02-25 08:51:00', NULL, '2026-02-25 08:51:00', 0, 5, 1, 14, 3, '2026-02-24', '2026-02-24 07:14:06', '2026-02-24 07:20:04', '2026-02-24 07:29:57', 0, 0.00, 0.26, 'Break-in di luar jam istirahat; Break-out di luar jam istirahat; Checkout lebih awal dari jam pulang'),
-('2026-02-25 08:51:00', NULL, '2026-02-25 08:51:00', 0, 6, 1, 13, 3, '2026-02-24', '2026-02-24 07:42:33', '2026-02-24 07:51:23', NULL, 0, 0.00, 0.00, 'Tidak melakukan break-out; Tidak melakukan checkout');
+('2026-02-25 08:50:00', NULL, '2026-02-25 08:50:00', 0, 3, 1, 13, 3, '2026-02-24', '2026-02-24 07:42:33', '2026-02-24 07:51:23', NULL, 0, 0.00, 0.00, 'Tidak melakukan break-out; Tidak melakukan checkout');
 
 -- --------------------------------------------------------
 
@@ -155,8 +154,8 @@ CREATE TABLE `memberships` (
 
 INSERT INTO `memberships` (`created_at`, `deleted_at`, `updated_at`, `deleted`, `membership_id`, `membership_user_id`, `membership_company_id`, `membership_role`, `membership_status`, `membership_office_id`) VALUES
 ('2026-02-19 21:34:22', NULL, NULL, 0, 1, 1, 1, 'company', 'active', NULL),
-('2026-02-19 21:55:47', NULL, NULL, 0, 2, 2, 1, 'employee', 'active', NULL),
-('2026-02-27 06:41:01', NULL, NULL, 0, 18, 22, 1, 'company', 'active', NULL);
+('2026-02-19 21:55:47', NULL, NULL, 0, 2, 2, 1, 'company', 'active', NULL),
+('2026-03-11 12:09:31', NULL, NULL, 0, 52, 14, 1, 'company', 'active', NULL);
 
 -- --------------------------------------------------------
 
@@ -184,7 +183,7 @@ CREATE TABLE `offices` (
 --
 
 INSERT INTO `offices` (`created_at`, `deleted_at`, `updated_at`, `deleted`, `office_id`, `office_company_id`, `office_name`, `office_address`, `office_longitude`, `office_latitude`, `office_maximum_distance_attendance`, `office_wifi_mac_address`) VALUES
-('2026-02-19 21:35:12', NULL, NULL, 0, 1, 1, 'Toko Baju Kekinian', 'Jl. Jendral Sudirman No. 123', '105.34932219987422', '-5.313826776525405', 10, '00:1A:2B:3C:4D:5E'),
+('2026-02-19 21:35:12', NULL, NULL, 0, 1, 1, 'Gudang Fresh', 'Jl. Jendral Sudirman No. 123', '105.34932219987422', '-5.313826776525405', 10, '00:1A:2B:3C:4D:5E'),
 ('2026-02-24 08:36:59', NULL, NULL, 0, 2, 1, 'Fresh Abseni', 'Jl', '105.2580', '-5.4287', 50, NULL);
 
 -- --------------------------------------------------------
@@ -203,6 +202,14 @@ CREATE TABLE `positions` (
   `position_name` varchar(100) NOT NULL,
   `position_hourly_salary` decimal(12,2) NOT NULL COMMENT 'Gaji per jam'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `positions`
+--
+
+INSERT INTO `positions` (`created_at`, `deleted_at`, `updated_at`, `deleted`, `position_id`, `position_company_id`, `position_name`, `position_hourly_salary`) VALUES
+('2026-02-27 15:56:43', NULL, '2026-02-27 15:56:43', 0, 3, 1, 'Tukang', 77.00),
+('2026-02-27 16:05:57', NULL, '2026-02-27 16:05:57', 0, 5, 1, 'test', 3333.00);
 
 -- --------------------------------------------------------
 
@@ -226,7 +233,8 @@ CREATE TABLE `scheduler_run_logs` (
 --
 
 INSERT INTO `scheduler_run_logs` (`created_at`, `deleted_at`, `updated_at`, `deleted`, `id`, `job_name`, `run_date`, `status`) VALUES
-('2026-02-27 14:07:06', NULL, '2026-02-27 14:07:06', 0, 1, 'RecapDailyAttendance', '2026-02-26', 'success');
+('2026-02-27 14:07:06', NULL, '2026-02-27 14:07:06', 0, 1, 'RecapDailyAttendance', '2026-02-26', 'success'),
+('2026-03-07 00:00:00', NULL, '2026-03-07 00:00:00', 0, 2, 'RecapDailyAttendance', '2026-03-06', 'success');
 
 -- --------------------------------------------------------
 
@@ -318,8 +326,8 @@ CREATE TABLE `users` (
   `user_position_id` int UNSIGNED DEFAULT NULL,
   `user_face_id` text,
   `user_fingerprint_id` varchar(255) DEFAULT NULL,
-  `user_fingerprint_device_id` text,
-  `user_fingerprint_device_name` text
+  `user_fingerprint_device_id` varchar(255) DEFAULT NULL,
+  `user_fingerprint_device_name` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
@@ -327,9 +335,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`created_at`, `deleted_at`, `updated_at`, `deleted`, `user_id`, `user_name`, `user_password`, `user_whatsapp_number`, `user_role`, `user_device_id`, `user_onboarding_status`, `user_position_id`, `user_face_id`, `user_fingerprint_id`, `user_fingerprint_device_id`, `user_fingerprint_device_name`) VALUES
-('2026-02-19 21:34:22', NULL, '2026-02-24 08:36:59', 0, 1, 'John Doe', '6c18398bb71db30c63a90b5b3ff1aba06e3477f2', '6281234567890', 'admin', '_', 'completed', NULL, NULL, NULL, NULL, NULL),
-('2026-02-19 21:55:47', NULL, '2026-02-20 15:47:20', 0, 2, 'Dearmant', 'b0e2cb911385fddddaa90f4733dafd347b86d9d5', '6283168421426', 'user', '_', 'waiting', 1, NULL, NULL, NULL, NULL),
-('2026-02-27 06:41:01', NULL, '2026-02-27 14:04:46', 0, 22, 'admin22', '6c18398bb71db30c63a90b5b3ff1aba06e3477f2', '62812345678922', 'admin', '_', 'waiting', NULL, NULL, NULL, NULL, NULL);
+('2026-03-06 16:07:33', NULL, '2026-03-06 16:07:51', 0, 2, 'admin', '6c18398bb71db30c63a90b5b3ff1aba06e3477f2', '6281234567890', 'admin', '_', 'completed', NULL, 'adcacccc-96ce-49cc-945d-eda7e08e8d29', NULL, NULL, NULL),
+('2026-03-11 12:09:31', NULL, '2026-03-11 12:09:30', 0, 14, 'admin100', '6c18398bb71db30c63a90b5b3ff1aba06e3477f2', '628123456789100', 'admin', '_', 'completed', NULL, NULL, NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -404,8 +411,7 @@ ALTER TABLE `SequelizeMeta`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`user_id`),
-  ADD UNIQUE KEY `user_whatsapp_number` (`user_whatsapp_number`),
-  ADD UNIQUE KEY `user_fingerprint_id` (`user_fingerprint_id`);
+  ADD UNIQUE KEY `user_whatsapp_number` (`user_whatsapp_number`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -415,13 +421,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `attendances`
 --
 ALTER TABLE `attendances`
-  MODIFY `attendance_id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `attendance_id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `break_times`
 --
 ALTER TABLE `break_times`
-  MODIFY `break_time_id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `break_time_id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `companies`
@@ -433,13 +439,13 @@ ALTER TABLE `companies`
 -- AUTO_INCREMENT for table `daily_attendance_summaries`
 --
 ALTER TABLE `daily_attendance_summaries`
-  MODIFY `summary_id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `summary_id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `memberships`
 --
 ALTER TABLE `memberships`
-  MODIFY `membership_id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `membership_id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `offices`
@@ -451,13 +457,13 @@ ALTER TABLE `offices`
 -- AUTO_INCREMENT for table `positions`
 --
 ALTER TABLE `positions`
-  MODIFY `position_id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `position_id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `scheduler_run_logs`
 --
 ALTER TABLE `scheduler_run_logs`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `schedules`
@@ -469,7 +475,7 @@ ALTER TABLE `schedules`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `user_id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Constraints for dumped tables
